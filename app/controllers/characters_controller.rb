@@ -1,8 +1,9 @@
 class CharactersController < ApplicationController
-  before_action :set_character, only: [:show, :edit, :update, :destroy, :add_languages]
+  before_action :set_character, only: [:show, :edit, :update, :destroy]
 
   def index
-    @characters = Character.all
+    @q = Character.ransack(params[:q])
+    @characters = @q.result(uniq: true).paginate(page: params[:page], per_page: 50)
   end
 
   def show
@@ -38,18 +39,12 @@ class CharactersController < ApplicationController
     redirect_to characters_url, notice: 'Character was successfully destroyed.'
   end
 
-  def add_languages
-    als = AddLanguageService.new(params)
-    als.add_languages
-    redirect_to @character
-  end
-
   private
     def set_character
       @character = Character.find(params[:id])
     end
 
     def character_params
-      params.require(:character).permit(:image)
+      params.require(:character).permit(:new, :old, :radical, :strokes, :grade)
     end
 end

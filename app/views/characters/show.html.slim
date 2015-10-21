@@ -1,10 +1,19 @@
 table.table.table-striped
   tr
-    th Path:
-    td= @character.image
+    th New:
+    td= @character.new
   tr
-    th Image:
-    td= image_tag @character.image
+    th Old:
+    td= @character.old
+  tr
+    th Radical:
+    td= @character.radical
+  tr
+    th Strokes:
+    td= @character.strokes
+  tr
+    th Grade:
+    td= @character.grade
 
 h3 Languages
 
@@ -14,10 +23,10 @@ h3 Languages
     .form-group
       = label_tag "#{lang_name}_meaning"
       = text_field_tag "#{lang_name}_meaning", CharacterLanguage.find_by(language: lang, character: @character).try(:meaning), class: "form-control"
-    - unless lang.name == "English"
+    - unless lang.name == "english"
       .form-group
         = label_tag "#{lang_name}_pronunciation"
-        = text_field_tag "#{lang_name}_pronunciation", CharacterLanguage.find_by(language: lang, character: @character).try(:meaning), class: "form-control"
+        = text_field_tag "#{lang_name}_pronunciation", CharacterLanguage.find_by(language: lang, character: @character).try(:pronunciation), class: "form-control"
 
   = submit_tag "Save Changes", class: "btn btn-primary"
 

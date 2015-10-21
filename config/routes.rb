@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :characters
   resources :character_languages
   resources :languages
   resources :characters do

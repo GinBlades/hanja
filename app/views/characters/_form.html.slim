@@ -2,7 +2,11 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :image
+    = f.input :new
+    = f.input :old
+    = f.input :radical
+    = f.input :strokes
+    = f.input :grade
 
   .form-actions
     = f.button :submit, class: 'btn btn-success'

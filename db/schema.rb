@@ -30,7 +30,11 @@ ActiveRecord::Schema.define(version: 20151021131217) do
   add_index "character_languages", ["language_id"], name: "index_character_languages_on_language_id", using: :btree
 
   create_table "characters", force: :cascade do |t|
-    t.string   "image",      null: false
+    t.string   "new",        null: false
+    t.string   "old"
+    t.string   "radical"
+    t.integer  "strokes"
+    t.string   "grade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
