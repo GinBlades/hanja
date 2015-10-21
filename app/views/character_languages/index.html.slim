@@ -1,0 +1,28 @@
+h1 
+  | Character Languages
+  = link_to "New Character language", new_character_language_path, class: "btn btn-primary"
+
+table.table.table-striped
+  thead
+    tr
+      th Language
+      th Character
+      th Meaning
+      th Pronunciation
+      th
+      th
+      
+  tbody
+    - @character_languages.each do |character_language|
+      tr
+        td= character_language.language
+        td= character_language.character
+        td= character_language.meaning
+        td= character_language.pronunciation
+        td= link_to "Show", character_language
+        td
+          = link_to "Edit", edit_character_language_path(character_language)
+          '
+          |/
+          '
+          = link_to "Destroy", character_language, method: :delete, data: { confirm: "Are you sure?" }

@@ -1,0 +1,24 @@
+h1 
+  | Characters
+  = link_to "New Character", new_character_path, class: "btn btn-primary"
+
+table.table.table-striped
+  thead
+    tr
+      th Image
+      th
+      th
+      th
+      
+  tbody
+    - @characters.each do |character|
+      tr
+        td= character.image
+        td= image_tag character.image
+        td= link_to "Show", character
+        td
+          = link_to "Edit", edit_character_path(character)
+          '
+          |/
+          '
+          = link_to "Destroy", character, method: :delete, data: { confirm: "Are you sure?" }

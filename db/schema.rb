@@ -11,10 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317172314) do
+ActiveRecord::Schema.define(version: 20151021131217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "character_languages", force: :cascade do |t|
+    t.integer  "language_id",   null: false
+    t.integer  "character_id",  null: false
+    t.string   "meaning"
+    t.string   "pronunciation"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "character_languages", ["character_id"], name: "index_character_languages_on_character_id", using: :btree
+  add_index "character_languages", ["language_id", "character_id"], name: "index_character_languages_on_language_id_and_character_id", unique: true, using: :btree
+  add_index "character_languages", ["language_id"], name: "index_character_languages_on_language_id", using: :btree
+
+  create_table "characters", force: :cascade do |t|
+    t.string   "image",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -39,4 +64,6 @@ ActiveRecord::Schema.define(version: 20150317172314) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "character_languages", "characters"
+  add_foreign_key "character_languages", "languages"
 end

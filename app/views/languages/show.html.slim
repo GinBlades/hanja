@@ -1,0 +1,8 @@
+table.table.table-striped
+  tr
+    th Name:
+    td= @language.name
+
+.btn-group
+  = link_to "Edit", edit_language_path(@language), class: "btn btn-default"
+  = link_to "Back", languages_path, class: "btn btn-default"
