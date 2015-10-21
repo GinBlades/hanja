@@ -22,7 +22,7 @@ class AddLanguageService
 
   def add_languages
     @grouped_params.each do |group, fields|
-      language = Language.find_by(name: group.titleize)
+      language = Language.find_by(name: group)
       cl = CharacterLanguage.find_or_create_by(character_id: @character_id, language_id: language.id)
       assign_fields(cl, fields)
       cl.save

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021131217) do
+ActiveRecord::Schema.define(version: 20151021192942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 20151021131217) do
   add_index "character_languages", ["language_id", "character_id"], name: "index_character_languages_on_language_id_and_character_id", unique: true, using: :btree
   add_index "character_languages", ["language_id"], name: "index_character_languages_on_language_id", using: :btree
 
+  create_table "character_quizzes", force: :cascade do |t|
+    t.integer  "quiz_id"
+    t.integer  "character_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "character_quizzes", ["character_id"], name: "index_character_quizzes_on_character_id", using: :btree
+  add_index "character_quizzes", ["quiz_id"], name: "index_character_quizzes_on_quiz_id", using: :btree
+
   create_table "characters", force: :cascade do |t|
     t.string   "new",        null: false
     t.string   "old"
@@ -44,6 +54,19 @@ ActiveRecord::Schema.define(version: 20151021131217) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "from_language_id"
+    t.integer  "to_language_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "quizzes", ["from_language_id"], name: "index_quizzes_on_from_language_id", using: :btree
+  add_index "quizzes", ["to_language_id"], name: "index_quizzes_on_to_language_id", using: :btree
+  add_index "quizzes", ["user_id"], name: "index_quizzes_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -70,4 +93,9 @@ ActiveRecord::Schema.define(version: 20151021131217) do
 
   add_foreign_key "character_languages", "characters"
   add_foreign_key "character_languages", "languages"
+  add_foreign_key "character_quizzes", "characters"
+  add_foreign_key "character_quizzes", "quizzes"
+  add_foreign_key "quizzes", "languages", column: "from_language_id"
+  add_foreign_key "quizzes", "languages", column: "to_language_id"
+  add_foreign_key "quizzes", "users"
 end

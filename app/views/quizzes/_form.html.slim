@@ -4,6 +4,8 @@
   .form-inputs
     = f.association :user
     = f.input :name
+    = f.association :from_language
+    = f.association :to_language
 
   .form-actions
     = f.button :submit, class: 'btn btn-success'

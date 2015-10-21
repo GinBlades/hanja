@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :character_quizzes
-  resources :quizzes
+  resources :quizzes do
+    member do
+      post :add_to
+    end
+  end
   resources :characters
   resources :character_languages
   resources :languages

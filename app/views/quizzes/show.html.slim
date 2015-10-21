@@ -5,7 +5,76 @@ table.table.table-striped
   tr
     th Name:
     td= @quiz.name
+  tr
+    th From language:
+    td= @quiz.from_language
+  tr
+    th To language:
+    td= @quiz.to_language
 
 .btn-group
   = link_to "Edit", edit_quiz_path(@quiz), class: "btn btn-default"
   = link_to "Back", quizzes_path, class: "btn btn-default"
+
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title Character List
+      .panel-body
+        .row
+          p= link_to "Study", "#", class: "btn btn-primary"
+        .row
+          table.table.table-striped
+            thead
+              tr
+                th New
+                th Old
+                th= @quiz.from_language
+                th= @quiz.to_language
+                th
+            tbody
+              - @quiz.character_quizzes.each do |cq|
+                tr
+                  td= cq.character.new
+                  td= cq.character.old
+                  td= cq.character.meaning_for(@quiz.from_language.name)
+                  td= cq.character.meaning_for(@quiz.to_language.name)
+                  td
+        .row
+          = link_to "Remove All", "#", class: "btn btn-default"
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title Add Characters
+      .panel-body
+        .row
+          = form_tag(@quiz, method: :get) do
+            = label_tag :query
+            = text_field_tag :query, nil, class: "form-control"
+            = submit_tag "Search", class: "btn btn-default"
+            
+        .row
+          = form_tag(add_to_quiz_path(@quiz)) do
+            table.table.table-striped
+              thead
+                tr
+                  th New
+                  th Old
+                  th Grade
+                  th= @quiz.from_language.name.titleize
+                  th= @quiz.to_language.name.titleize
+                  th
+              tbody
+                - @characters.each do |character|
+                  tr
+                    td= link_to character.new, character
+                    td= character.old
+                    td= character.grade
+                    td= character.meaning_for(@quiz.from_language.name)
+                    td= character.meaning_for(@quiz.to_language.name)
+                    td= check_box_tag "characters[]", character.id
+            = will_paginate(@characters)
+            = submit_tag "Add Selected", class: "btn btn-primary"
+        .row
+

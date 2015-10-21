@@ -11,7 +11,7 @@ nav.navbar.navbar-inverse role="navigation"
       ul.nav.navbar-nav
         li= link_to "Characters", characters_path
         li= link_to "Languages", languages_path
-        li= link_to "Matching", character_languages_path
+        li= link_to "Quizzes", quizzes_path
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           li = link_to 'Sign out', destroy_user_session_path, method: :delete

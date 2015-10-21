@@ -1,25 +1,25 @@
 class QuizzesController < ApplicationController
-  before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_action :set_quiz, only: [:show, :edit, :update, :destroy, :add_to]
 
-  # GET /quizzes
   def index
     @quizzes = Quiz.all
   end
 
-  # GET /quizzes/1
   def show
+    if params[:query]
+      @characters = Character.full_search(params[:query]).paginate(page: params[:page], per_page: 10)
+    else
+      @characters = Character.paginate(page: params[:page], per_page: 10)
+    end
   end
 
-  # GET /quizzes/new
   def new
     @quiz = Quiz.new
   end
 
-  # GET /quizzes/1/edit
   def edit
   end
 
-  # POST /quizzes
   def create
     @quiz = Quiz.new(quiz_params)
 
@@ -30,7 +30,6 @@ class QuizzesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /quizzes/1
   def update
     if @quiz.update(quiz_params)
       redirect_to @quiz, notice: 'Quiz was successfully updated.'
@@ -39,20 +38,27 @@ class QuizzesController < ApplicationController
     end
   end
 
-  # DELETE /quizzes/1
   def destroy
     @quiz.destroy
     redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.'
   end
 
+  def add_to
+    unless params[:characters].blank?
+      characters = Character.where(id: params[:characters].map(&:to_i))
+      characters.each do |character|
+        @quiz.character_quizzes.find_or_create_by(character_id: character.id)
+      end
+    end
+    redirect_to @quiz
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_quiz
       @quiz = Quiz.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def quiz_params
-      params.require(:quiz).permit(:user_id, :name)
+      params.require(:quiz).permit(:user_id, :name, :from_language_id, :to_language_id)
     end
 end

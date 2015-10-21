@@ -1,5 +1,5 @@
 class CharactersController < ApplicationController
-  before_action :set_character, only: [:show, :edit, :update, :destroy]
+  before_action :set_character, only: [:show, :edit, :update, :destroy, :add_languages]
 
   def index
     @q = Character.ransack(params[:q])
@@ -37,6 +37,12 @@ class CharactersController < ApplicationController
   def destroy
     @character.destroy
     redirect_to characters_url, notice: 'Character was successfully destroyed.'
+  end
+
+  def add_languages
+    als = AddLanguageService.new(params)
+    als.add_languages
+    redirect_to @character
   end
 
   private

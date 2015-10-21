@@ -7,6 +7,8 @@ table.table.table-striped
     tr
       th User
       th Name
+      th From language
+      th To language
       th
       th
       
@@ -15,6 +17,8 @@ table.table.table-striped
       tr
         td= quiz.user
         td= quiz.name
+        td= quiz.from_language
+        td= quiz.to_language
         td= link_to "Show", quiz
         td
           = link_to "Edit", edit_quiz_path(quiz)
