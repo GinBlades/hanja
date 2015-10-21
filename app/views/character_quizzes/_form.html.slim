@@ -1,0 +1,9 @@
+= simple_form_for(@character_quiz) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :quiz
+    = f.association :character
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-success'

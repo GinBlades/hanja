@@ -1,0 +1,11 @@
+table.table.table-striped
+  tr
+    th User:
+    td= @quiz.user
+  tr
+    th Name:
+    td= @quiz.name
+
+.btn-group
+  = link_to "Edit", edit_quiz_path(@quiz), class: "btn btn-default"
+  = link_to "Back", quizzes_path, class: "btn btn-default"
