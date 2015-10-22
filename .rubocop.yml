@@ -1,11 +1,11 @@
 AllCops:
   RunRailsCops: true
   Include:
-    - 'Gemfile'
+    - "Gemfile"
   Exclude:
-    - 'bin/**/*'
-    - 'lib/templates/**/*'
-    - 'db/schema.rb'
+    - "bin/**/*"
+    - "lib/templates/**/*"
+    - "db/schema.rb"
 
 Metrics/LineLength:
   Max: 120
@@ -17,6 +17,7 @@ Metrics/MethodLength:
     - "db/migrate/*"
 
 Metrics/AbcSize:
+  Max: 16
   Exclude:
     - "db/migrate/*"
 

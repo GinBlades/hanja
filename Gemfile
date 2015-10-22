@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby "2.2.3"
 
 gem "rails", "4.2.4"
 gem "pg"
@@ -37,3 +38,7 @@ gem "slim-rails"
 gem "devise"
 gem "ransack"
 gem "will_paginate"
+
+gem "rails_12factor", group: :production
+gem "puma"
+gem "dotenv-rails"
