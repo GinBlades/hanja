@@ -51,6 +51,6 @@ class CharactersController < ApplicationController
     end
 
     def character_params
-      params.require(:character).permit(:new, :old, :radical, :strokes, :grade)
+      params.require(:character).permit(:modern, :traditional, :radical, :strokes, :grade)
     end
 end

@@ -5,7 +5,7 @@ h1
 table.table.table-striped
   thead
     tr
-      th= sort_link @q, :new
+      th= sort_link @q, :modern
       th= sort_link @q, :radical
       th= sort_link @q, :strokes
       th= sort_link @q, :grade
@@ -18,7 +18,7 @@ table.table.table-striped
   tbody
     - @characters.each do |character|
       tr
-        td.character-md= character.new
+        td.character-md= character.modern
         td.character-md= character.radical
         td= character.strokes
         td= character.grade

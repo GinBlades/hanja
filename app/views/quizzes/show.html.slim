@@ -28,16 +28,16 @@ table.table.table-striped
           table.table.table-striped
             thead
               tr
-                th New
-                th Old
+                th Modern
+                th Traditional
                 th= @quiz.from_language
                 th= @quiz.to_language
                 th
             tbody
               - @quiz.character_quizzes.each do |cq|
                 tr
-                  td= cq.character.new
-                  td= cq.character.old
+                  td= cq.character.modern
+                  td= cq.character.traditional
                   td= cq.character.meaning_for(@quiz.from_language.name)
                   td= cq.character.meaning_for(@quiz.to_language.name)
                   td
@@ -59,8 +59,8 @@ table.table.table-striped
             table.table.table-striped
               thead
                 tr
-                  th New
-                  th Old
+                  th Modern
+                  th Traditional
                   th Grade
                   th= @quiz.from_language.name.titleize
                   th= @quiz.to_language.name.titleize
@@ -68,8 +68,8 @@ table.table.table-striped
               tbody
                 - @characters.each do |character|
                   tr
-                    td= link_to character.new, character
-                    td= character.old
+                    td= link_to character.modern, character
+                    td= character.traditonal
                     td= character.grade
                     td= character.meaning_for(@quiz.from_language.name)
                     td= character.meaning_for(@quiz.to_language.name)

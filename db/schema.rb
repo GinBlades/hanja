@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021192942) do
+ActiveRecord::Schema.define(version: 20151022181427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,23 +30,24 @@ ActiveRecord::Schema.define(version: 20151021192942) do
   add_index "character_languages", ["language_id"], name: "index_character_languages_on_language_id", using: :btree
 
   create_table "character_quizzes", force: :cascade do |t|
-    t.integer  "quiz_id"
-    t.integer  "character_id"
+    t.integer  "quiz_id",      null: false
+    t.integer  "character_id", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
   add_index "character_quizzes", ["character_id"], name: "index_character_quizzes_on_character_id", using: :btree
+  add_index "character_quizzes", ["quiz_id", "character_id"], name: "index_character_quizzes_on_quiz_id_and_character_id", unique: true, using: :btree
   add_index "character_quizzes", ["quiz_id"], name: "index_character_quizzes_on_quiz_id", using: :btree
 
   create_table "characters", force: :cascade do |t|
-    t.string   "new",        null: false
-    t.string   "old"
     t.string   "radical"
     t.integer  "strokes"
     t.string   "grade"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "modern",      null: false
+    t.string   "traditional"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -56,10 +57,10 @@ ActiveRecord::Schema.define(version: 20151021192942) do
   end
 
   create_table "quizzes", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.integer  "from_language_id"
-    t.integer  "to_language_id"
+    t.integer  "user_id",          null: false
+    t.string   "name",             null: false
+    t.integer  "from_language_id", null: false
+    t.integer  "to_language_id",   null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end

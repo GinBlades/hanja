@@ -15,8 +15,8 @@ namespace :setup do
     Language.find_or_create_by(name: "japanese")
     CSV.foreach(Rails.root.join("lib", "assets", "hanja.csv"), headers: true) do |row|
       character = Character.create(
-        new: row["New"],
-        old: row["Old"],
+        modern: row["New"],
+        traditional: row["Old"],
         radical: row["Radical"],
         strokes: row["Strokes"],
         grade: row["Grade"]

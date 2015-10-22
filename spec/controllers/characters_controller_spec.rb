@@ -6,9 +6,9 @@ RSpec.describe CharactersController, type: :controller do
   describe "Standard CRUD" do
     let(:instance_character) { assigns(:character) }
     let(:base_character) { create(:character) }
-    let(:static_character) { create(:character, name: 'spec-character') }
-    let(:valid_attributes) { attributes_for(:character, name: 'spec-character') }
-    let(:invalid_attributes) { attributes_for(:character, name: nil) }
+    let(:static_character) { create(:character, modern: 'spec-character') }
+    let(:valid_attributes) { attributes_for(:character, modern: 'spec-character') }
+    let(:invalid_attributes) { attributes_for(:character, modern: nil) }
   
     describe "GET #index" do
       it "populates an array of all @characters" do

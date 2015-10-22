@@ -7,8 +7,8 @@ RSpec.describe QuizzesController, type: :controller do
     let(:instance_quiz) { assigns(:quiz) }
     let(:base_quiz) { create(:quiz) }
     let(:static_quiz) { create(:quiz, name: 'spec-quiz') }
-    let(:valid_attributes) { attributes_for(:quiz, name: 'spec-quiz') }
-    let(:invalid_attributes) { attributes_for(:quiz, name: nil) }
+    let(:valid_attributes) { build(:quiz, name: 'spec-quiz').attributes }
+    let(:invalid_attributes) { build(:quiz, name: nil).attributes }
   
     describe "GET #index" do
       it "populates an array of all @quizzes" do

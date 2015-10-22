@@ -5,4 +5,6 @@ class Quiz < ActiveRecord::Base
 
   has_many :character_quizzes, dependent: :destroy
   has_many :characters, through: :character_quizzes
+
+  validates :user_id, :from_language_id, :to_language_id, :name, presence: true
 end

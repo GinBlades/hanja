@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, # :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :quizzes
   def to_s
     username
   end
