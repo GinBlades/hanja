@@ -5,5 +5,4 @@ FactoryGirl.define do
     from_language
     to_language
   end
-
 end

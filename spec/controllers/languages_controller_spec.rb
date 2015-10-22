@@ -1,15 +1,15 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe LanguagesController, type: :controller do
-
-  
   describe "Standard CRUD" do
     let(:instance_language) { assigns(:language) }
     let(:base_language) { create(:language) }
-    let(:static_language) { create(:language, name: 'spec-language') }
-    let(:valid_attributes) { attributes_for(:language, name: 'spec-language') }
+    let(:static_language) { create(:language, name: "spec-language") }
+    let(:valid_attributes) { attributes_for(:language, name: "spec-language") }
     let(:invalid_attributes) { attributes_for(:language, name: nil) }
-  
+
+    login_user
+
     describe "GET #index" do
       it "populates an array of all @languages" do
         second_language = create :language
@@ -17,7 +17,7 @@ RSpec.describe LanguagesController, type: :controller do
         expect(assigns(:languages)).to match_array([base_language, second_language])
       end
     end
-  
+
     describe "GET show" do
       it "assigns the requested language as @language" do
         get :show, id: base_language

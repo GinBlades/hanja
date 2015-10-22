@@ -3,5 +3,4 @@ FactoryGirl.define do
     quiz
     character
   end
-
 end

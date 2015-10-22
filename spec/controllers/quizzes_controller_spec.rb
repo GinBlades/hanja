@@ -1,15 +1,15 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe QuizzesController, type: :controller do
-
-  
   describe "Standard CRUD" do
     let(:instance_quiz) { assigns(:quiz) }
     let(:base_quiz) { create(:quiz) }
-    let(:static_quiz) { create(:quiz, name: 'spec-quiz') }
-    let(:valid_attributes) { build(:quiz, name: 'spec-quiz').attributes }
+    let(:static_quiz) { create(:quiz, name: "spec-quiz") }
+    let(:valid_attributes) { build(:quiz, name: "spec-quiz").attributes }
     let(:invalid_attributes) { build(:quiz, name: nil).attributes }
-  
+
+    login_user
+
     describe "GET #index" do
       it "populates an array of all @quizzes" do
         second_quiz = create :quiz
@@ -17,7 +17,7 @@ RSpec.describe QuizzesController, type: :controller do
         expect(assigns(:quizzes)).to match_array([base_quiz, second_quiz])
       end
     end
-  
+
     describe "GET show" do
       it "assigns the requested quiz as @quiz" do
         get :show, id: base_quiz

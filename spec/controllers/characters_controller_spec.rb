@@ -1,15 +1,15 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CharactersController, type: :controller do
-
-  
   describe "Standard CRUD" do
     let(:instance_character) { assigns(:character) }
     let(:base_character) { create(:character) }
-    let(:static_character) { create(:character, modern: 'spec-character') }
-    let(:valid_attributes) { attributes_for(:character, modern: 'spec-character') }
+    let(:static_character) { create(:character, modern: "spec-character") }
+    let(:valid_attributes) { attributes_for(:character, modern: "spec-character") }
     let(:invalid_attributes) { attributes_for(:character, modern: nil) }
-  
+
+    login_user
+
     describe "GET #index" do
       it "populates an array of all @characters" do
         second_character = create :character
@@ -17,7 +17,7 @@ RSpec.describe CharactersController, type: :controller do
         expect(assigns(:characters)).to match_array([base_character, second_character])
       end
     end
-  
+
     describe "GET show" do
       it "assigns the requested character as @character" do
         get :show, id: base_character

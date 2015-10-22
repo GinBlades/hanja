@@ -5,9 +5,9 @@ class AddLanguageService
   end
 
   def group_params(params)
-    params.select! { |k, v| k.match(/(meaning|pronunciation)/) }
-    params.reject! { |k, v| v.blank? }
-    groups = params.group_by { |k, v| k.split("_")[0] }
+    params.select! { |k, _v| k.match(/(meaning|pronunciation)/) }
+    params.reject! { |_k, v| v.blank? }
+    params.group_by { |k, _v| k.split("_")[0] }
   end
 
   def assign_fields(cl, fields)

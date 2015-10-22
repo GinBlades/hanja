@@ -7,9 +7,6 @@ AllCops:
     - 'lib/templates/**/*'
     - 'db/schema.rb'
 
-Style/StringLiterals:
-  EnforcedStyle: "double_quotes"
-
 Metrics/LineLength:
   Max: 120
   Exclude:
@@ -39,3 +36,9 @@ Style/BlockComments:
 
 Style/Documentation:
   Enabled: false
+
+Style/IndentationConsistency:
+  EnforcedStyle: "rails"
+
+Style/StringLiterals:
+  EnforcedStyle: "double_quotes"

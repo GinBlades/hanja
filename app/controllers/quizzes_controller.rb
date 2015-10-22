@@ -24,7 +24,7 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new(quiz_params)
 
     if @quiz.save
-      redirect_to @quiz, notice: 'Quiz was successfully created.'
+      redirect_to @quiz, notice: "Quiz was successfully created."
     else
       render :new
     end
@@ -32,7 +32,7 @@ class QuizzesController < ApplicationController
 
   def update
     if @quiz.update(quiz_params)
-      redirect_to @quiz, notice: 'Quiz was successfully updated.'
+      redirect_to @quiz, notice: "Quiz was successfully updated."
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class QuizzesController < ApplicationController
 
   def destroy
     @quiz.destroy
-    redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.'
+    redirect_to quizzes_url, notice: "Quiz was successfully destroyed."
   end
 
   def add_to
@@ -54,6 +54,7 @@ class QuizzesController < ApplicationController
   end
 
   private
+
     def set_quiz
       @quiz = Quiz.find(params[:id])
     end
