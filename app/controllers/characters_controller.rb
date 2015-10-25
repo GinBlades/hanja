@@ -2,9 +2,8 @@ class CharactersController < ApplicationController
   before_action :set_character, only: [:show, :edit, :update, :destroy, :add_languages]
 
   def index
-    @q = Character.ransack(params[:q])
-    @characters = @q.result(uniq: true).includes(:character_languages).paginate(page: params[:page], per_page: 50)
-    @languages = Language.order(name: :asc)
+    @languages = %w(english japanese korean)
+    @characters = Character.language_table(@languages)
   end
 
   def show

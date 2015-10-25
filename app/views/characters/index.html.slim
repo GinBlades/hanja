@@ -5,12 +5,12 @@ h1
 table.table.table-striped
   thead
     tr
-      th= sort_link @q, :modern
-      th= sort_link @q, :radical
-      th= sort_link @q, :strokes
-      th= sort_link @q, :grade
+      th Modern
+      th Radical
+      th Strokes
+      th Grade
       - @languages.each do |language|
-        th= language.name
+        th= language.titleize
       th
       th
       
@@ -22,7 +22,7 @@ table.table.table-striped
         td= character.strokes
         td= character.grade
         - @languages.each do |language|
-          td= character.character_languages.find_by(language_id: language.id).try(:meaning)
+          td= character.send("#{language}_meaning")
         td= link_to "Show", character
         td
           = link_to "Edit", edit_character_path(character)
@@ -30,4 +30,3 @@ table.table.table-striped
           |/
           '
           = link_to "Destroy", character, method: :delete, data: { confirm: "Are you sure?" }
-= will_paginate(@characters)
