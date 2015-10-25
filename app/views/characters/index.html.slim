@@ -9,9 +9,8 @@ table.table.table-striped
       th= sort_link @q, :radical
       th= sort_link @q, :strokes
       th= sort_link @q, :grade
-      th English
-      th Japanese
-      th Korean
+      - @languages.each do |language|
+        th= language.name
       th
       th
       
@@ -22,9 +21,8 @@ table.table.table-striped
         td.character-md= character.radical
         td= character.strokes
         td= character.grade
-        td.col-md-2= character.meaning_for("english")
-        td.col-md-2= character.meaning_for("japanese")
-        td.col-md-2= character.meaning_for("korean")
+        - @languages.each do |language|
+          td= character.character_languages.find_by(language_id: language.id).try(:meaning)
         td= link_to "Show", character
         td
           = link_to "Edit", edit_character_path(character)

@@ -3,7 +3,8 @@ class CharactersController < ApplicationController
 
   def index
     @q = Character.ransack(params[:q])
-    @characters = @q.result(uniq: true).paginate(page: params[:page], per_page: 50)
+    @characters = @q.result(uniq: true).includes(:character_languages).paginate(page: params[:page], per_page: 50)
+    @languages = Language.order(name: :asc)
   end
 
   def show
