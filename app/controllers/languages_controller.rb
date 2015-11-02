@@ -2,10 +2,12 @@ class LanguagesController < ApplicationController
   before_action :set_language, only: [:show, :edit, :update, :destroy]
 
   def index
-    @languages = Language.all
+    @languages = Language.includes(:character_languages)
   end
 
   def show
+    @character_language = CharacterLanguage.includes(:character)
+      .where(language_id: @language.id).order(meaning: :asc)
   end
 
   def new

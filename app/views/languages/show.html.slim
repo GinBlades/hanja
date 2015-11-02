@@ -1,7 +1,24 @@
+h2= @language.name.titleize
+
 table.table.table-striped
-  tr
-    th Name:
-    td= @language.name
+  thead
+    tr
+      th Traditional
+      th Modern
+      th Radical
+      th Grade
+      th Meaning
+      th Pronunciation
+  tbody
+    - @character_language.each do |cl|
+      tr
+        td= cl.character.traditional
+        td= cl.character.modern
+        td= cl.character.radical
+        td= cl.character.grade
+        td= cl.meaning
+        td= cl.pronunciation
+  
 
 .btn-group
   = link_to "Edit", edit_language_path(@language), class: "btn btn-default"

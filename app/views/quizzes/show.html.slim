@@ -69,7 +69,7 @@ table.table.table-striped
                 - @characters.each do |character|
                   tr
                     td= link_to character.modern, character
-                    td= character.traditonal
+                    td= character.traditional
                     td= character.grade
                     td= character.meaning_for(@quiz.from_language.name)
                     td= character.meaning_for(@quiz.to_language.name)

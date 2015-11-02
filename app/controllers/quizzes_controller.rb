@@ -21,7 +21,7 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = Quiz.new(quiz_params)
+    @quiz = current_user.quizzes.build(quiz_params)
 
     if @quiz.save
       redirect_to @quiz, notice: "Quiz was successfully created."
@@ -60,6 +60,6 @@ class QuizzesController < ApplicationController
     end
 
     def quiz_params
-      params.require(:quiz).permit(:user_id, :name, :from_language_id, :to_language_id)
+      params.require(:quiz).permit(:name, :from_language_id, :to_language_id)
     end
 end
